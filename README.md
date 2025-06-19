@@ -1,81 +1,91 @@
 # 📦 Despliegue de Sitio Web Estático en Kubernetes con Minikube
 
-Este proyecto implementa un sitio web estático personalizado dentro de un entorno local usando Minikube y Kubernetes. Se utiliza una imagen de Docker personalizada basada en Nginx, que contiene archivos HTML, CSS y recursos propios.
+Este proyecto implementa un sitio web estático personalizado dentro de un entorno local usando **Minikube** y **Kubernetes**. Se utiliza una imagen Docker personalizada basada en **Nginx**, la cual contiene los archivos HTML y CSS del sitio.
 
 ---
 
-## 📁 Estructura del proyecto
+## ✅ Requisitos Previos
 
-```
+- Docker Desktop
+- Minikube
+- kubectl
+- Git Bash o PowerShell
+
+---
+
+## 📁 Estructura del Proyecto
+
 TPcloud/
-├── website-content/         # Contiene el sitio web estático + Dockerfile
-│   ├── index.html
-│   ├── style.css
-│   ├── assets/
-│   ├── Dockerfile
-│   └── .dockerignore
-└── k8s-manifests/           # Contiene los manifiestos de Kubernetes
-    ├── deployment.yaml
-    └── service.yaml
-```
+├── website-content/ # Contiene el sitio web estático + Dockerfile
+│ ├── index.html
+│ ├── style.css
+│ ├── assets/
+│ ├── Dockerfile
+│ └── .dockerignore
+└── k8s-manifests/ # Contiene los manifiestos de Kubernetes
+├── deployment.yaml
+└── service.yaml
+
+yaml
+Copiar
+Editar
 
 ---
 
-## 🔧 Requisitos
+## 🚀 Pasos para Desplegar
 
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [Minikube](https://minikube.sigs.k8s.io/docs/start/)
-- [kubectl](https://kubernetes.io/docs/tasks/tools/)
-- Git
+### 1. Clonar ambos repositorios
 
----
+```bash
+git clone https://github.com/ivobarbato/website-content
+git clone https://github.com/ivobarbato/k8s-manifests
+2. Compartir la carpeta en Docker Desktop
+Ir a:
+Settings > Resources > File Sharing
+Y asegurarse de que la carpeta website-content esté habilitada.
 
-## 🚀 Pasos para levantar el entorno
+3. Iniciar Minikube
+bash
+Copiar
+Editar
+minikube start --driver=docker
+Asegurate de tener Docker Desktop ejecutándose antes de este paso.
 
-1. Clonar ambos repositorios:
-   ```bash
-   git clone https://github.com/miusuario/website-content
-   git clone https://github.com/miusuario/k8s-manifests
-   ```
+4. Construir la imagen de Docker personalizada
+bash
+Copiar
+Editar
+cd website-content
+docker build -t ivowebsite:latest .
+5. Aplicar los manifiestos de Kubernetes
+bash
+Copiar
+Editar
+cd ../k8s-manifests
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+6. Verificar que el pod esté corriendo
+bash
+Copiar
+Editar
+kubectl get pods
+7. Acceder al sitio desde el navegador
+bash
+Copiar
+Editar
+minikube service website-service
+Esto abrirá una nueva pestaña en tu navegador con el sitio web funcionando.
 
-2. Abrir Docker Desktop y asegurarse de que la carpeta `website-content` esté compartida  
-   (`Settings > Resources > File Sharing`).
+🧠 Notas Finales
+Este entorno simula un despliegue casi productivo usando herramientas reales de infraestructura.
 
-3. Iniciar Minikube:
-   ```bash
-   minikube start
-   ```
+La imagen se construye localmente; no se utiliza un registry externo.
 
-4. Construir la imagen de Docker personalizada:
-   ```bash
-   cd website-content
-   docker build -t ivowebsite:latest .
-   ```
+Los manifiestos están separados por tipo (deployment y service) como buena práctica.
 
-5. Aplicar los manifiestos de Kubernetes:
-   ```bash
-   cd ../k8s-manifests
-   kubectl apply -f .
-   ```
+Se asegura persistencia usando una imagen con contenido embebido.
 
-6. Verificar que el pod esté corriendo:
-   ```bash
-   kubectl get pods
-   ```
-
-7. Acceder al sitio desde el navegador:
-   ```bash
-   minikube service website-service
-   ```
----
-
-## ✅ Notas finales
-
-- Este entorno simula un despliegue casi productivo usando herramientas reales de infraestructura.
-- La imagen se construye localmente y no se sube a un registro remoto.
-- Minikube permite hacer pruebas locales de manera simple sin necesidad de una nube.
-
----
-
-🧠 Desarrollado por: **Ivo Barbato**  
-📅 Entrega TP Cloud - Abril 2025
+👤 Desarrollado por
+Ivo Barbato
+Entrega TP Cloud – Abril 2025
+Repositorio principal: https://github.com/ivobarbato/static-website
