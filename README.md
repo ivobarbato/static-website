@@ -1,7 +1,7 @@
 # 📦 Despliegue de Sitio Web Estático en Kubernetes con Minikube
 
 Este proyecto implementa un sitio web estático personalizado dentro de un entorno local usando **Minikube** y **Kubernetes**. Se utiliza una imagen Docker personalizada basada en **Nginx**, la cual contiene los archivos HTML y CSS del sitio.
-
+💡 Nota: A diferencia de otras implementaciones que copian archivos manualmente dentro de Minikube, este proyecto incluye los archivos del sitio directamente en una imagen Docker personalizada. Por eso no es necesario usar comandos como `tar`, `minikube cp` o montar volúmenes persistentes.
 ---
 
 ## ✅ Requisitos Previos
