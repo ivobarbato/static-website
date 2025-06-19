@@ -67,26 +67,6 @@ TPcloud/
    ```bash
    minikube service website-service
    ```
-
----
-
-## 📸 Capturas requeridas para la entrega
-
-1. Estructura del proyecto (`TPcloud/`)
-2. `minikube start` funcionando correctamente
-3. `docker build` exitoso con `ivowebsite:latest`
-4. Contenido del `Dockerfile`
-5. Aplicación de los YAML (`kubectl apply -f .`)
-6. Resultado de `kubectl get pods` mostrando el pod en `Running`
-7. Dentro del pod: `ls -l /usr/share/nginx/html`
-8. Sitio cargado en el navegador desde el servicio de Kubernetes
-9. Contenido del `deployment.yaml` con:
-   ```yaml
-   image: ivowebsite:latest
-   imagePullPolicy: Never
-   ```
-10. `README.md` en el repositorio
-
 ---
 
 ## ✅ Notas finales
